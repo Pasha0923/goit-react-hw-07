@@ -1,24 +1,19 @@
 import css from "./ContactList.module.css";
 import Contact from "../Contact/Contact";
 import { useSelector } from "react-redux";
-import { selectContacts, selectNameFilter } from "../../selectors/selectors";
+import {} from "../../redux/selectors";
+import { selectFilteredContacts } from "../../redux/contactsSlice";
 
 const ContactList = () => {
-  // Отримуємо посилання на функцію відправки екшенів за допомогою хука useSelector
-  const selectedContacts = useSelector(selectContacts);
-  const filters = useSelector(selectNameFilter);
+  const FilteredContacts = useSelector(selectFilteredContacts);
 
-  //Функція для фільтрації списку контактів за ім'ям
-  const searchContacts = selectedContacts.filter((contact) =>
-    contact.userName.toLowerCase().includes(filters.toLowerCase())
-  );
   return (
     <ul className={css.contactsList}>
-      {searchContacts.map((contact) => (
+      {FilteredContacts.map((contact) => (
         <li key={contact.id}>
           <Contact
             id={contact.id}
-            userName={contact.userName}
+            name={contact.name}
             number={contact.number}
           />
         </li>

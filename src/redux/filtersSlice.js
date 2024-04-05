@@ -10,13 +10,13 @@ const detailsFiltersSlice = createSlice({
   // Початковий стан редюсера слайсу
   initialState: INITIAL_STATE_FILTERS,
   reducers: {
-    changeFilter(state, action) {
+    setFilter(state, action) {
       state.name = action.payload;
     },
   },
 });
 
 // експорт Генераторів Action Creator
-export const { changeFilter } = detailsFiltersSlice.actions;
+export const { setFilter } = detailsFiltersSlice.actions;
 // експорт Редюсера слайсу
 export const detailsFiltersReducer = detailsFiltersSlice.reducer;

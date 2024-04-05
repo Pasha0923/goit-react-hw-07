@@ -3,11 +3,11 @@ import { IoPerson } from "react-icons/io5";
 import { AiOutlineUserDelete } from "react-icons/ai";
 import css from "./Contact.module.css";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../redux/contactsSlice";
+import { apiDeleteContacts } from "../../redux/contactsOps";
 
-const Contact = ({ id, userName, number }) => {
+const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
-  const handleDelete = () => dispatch(deleteContact(id));
+  const handleDelete = () => dispatch(apiDeleteContacts(id));
   return (
     <div className={css.contactWrapper}>
       <div className={css.contactInfo}>
@@ -15,7 +15,7 @@ const Contact = ({ id, userName, number }) => {
           <span className={css.contactIcon}>
             <IoPerson />
           </span>
-          {userName}
+          {name}
         </p>
         <p className={css.contactText}>
           <span className={css.contactIcon}>

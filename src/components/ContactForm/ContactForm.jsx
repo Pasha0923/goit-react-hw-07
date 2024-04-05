@@ -2,14 +2,14 @@ import { Formik, ErrorMessage, Field, Form } from "formik";
 import css from "./ContactForm.module.css";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsSlice";
+import { apiPostContacts } from "../../redux/contactsOps";
 const INITIAL_FORM_DATA = {
-  userName: "",
+  name: "",
   number: "",
 };
 
 const contactFormSchema = Yup.object().shape({
-  userName: Yup.string()
+  name: Yup.string()
     .min(2, "User name must be at least 2 characters!")
     .max(50, "User name must be less than 50 characters!")
     .required("Required!"),
@@ -24,7 +24,7 @@ const ContactForm = () => {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
     console.log("values: ", values);
-    dispatch(addContact(values.userName, values.number));
+    dispatch(apiPostContacts(values));
     actions.resetForm();
   };
   return (
@@ -40,13 +40,9 @@ const ContactForm = () => {
             className={css.formInput}
             placeholder="Please enter name"
             type="text"
-            name="userName"
+            name="name"
           />
-          <ErrorMessage
-            className={css.errorMsg}
-            name="userName"
-            component="span"
-          />
+          <ErrorMessage className={css.errorMsg} name="name" component="span" />
         </label>
         <label className={css.label}>
           <span className={css.labelText}>Number: </span>
